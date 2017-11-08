@@ -1,0 +1,73 @@
+<head>
+  <title>Ready to Authorize</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="https://gofake1.net/main.css">
+  <style>
+  .centered-text {
+    text-align: center;
+  }
+  .gray {
+    color: gray;
+  }
+  </style>
+</head>
+
+<body>
+<script>
+function sendCode(code) {
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = handleRequestChange;
+  xhr.open('GET', 'https://drip.gofake1.net/auth/code/'+code, true);
+  xhr.send();
+}
+
+function handleRequestChange() {
+  if (this.readyState == 4 && this.status == 200) {
+    var response = JSON.parse(this.responseText);
+    document.getElementById('step1').style.display = 'none';
+    if (response.access_token) {
+      document.getElementById('step2-success').style.display = 'block';
+      document.getElementById('profile-picture').src = response.user.profile_picture;
+      document.getElementById('username').innerText = '@'+response.user.username;
+      document.getElementById('fullname').innerText = response.user.full_name;
+      document.getElementById('open-drip').href = 'drip-for-instagram://auth?access_token='+response.access_token+'&id='+response.user.id+'&username='+response.user.username+'&fullname='+response.user.full_name+'&profile_picture='+response.user.profile_picture;
+    } else if (response.error_type) {
+      document.getElementById('step2-error').style.display = 'block';
+      document.getElementById('error-message').innerText = response.error_message;
+    }
+  }
+}
+</script>
+
+<div class="navbar">
+  <h3 class="logo"><a href="/">Gofake1</a></h3>
+  <ul>
+    <li><a href="https://gofake1.net/blog/">Blog</a></li>
+    <li><a href="https://gofake1.net/projects/">Projects</a></li>
+    <li><a href="mailto:david@gofake1.net">Email</a> (<a href="https://gofake1.net/files/gofake1_pub.asc">pgp</a>)</li>
+  </ul>
+</div>
+
+<div id="step1" class="centered-text">
+  <h2>Ready to Authorize</h2>
+  <p>Click Continue to complete authorization. If you wish to stop the process, just close the page.</p>
+  <button onclick="sendCode('{{code}}')">Continue</button>
+</div>
+
+<div id="step2-success" class="centered-text" style="display:none;">
+  <h2>Authorization Succeeded</h2>
+  <p>Does everything look right? If so, the only thing left to do is to open Drip.</p>
+  <img id="profile-picture">
+  <h4>
+    <span id="username"></span><br>
+    <span id="fullname" class="gray"></span>
+  </h4>
+  <a id="open-drip"><button>Open Drip and Complete Authorization...</button></a>
+</div>
+
+<div id="step2-error" class="ceentered-text" style="display:none;">
+  <h2>Authorization Failed</h2>
+  <h4 id="error-message"></h4>
+  <p>If this error is unexpected, you can contact the developer via <a href="mailto:david@gofake1.net">email</a>.</p>
+</div>
+</body>
