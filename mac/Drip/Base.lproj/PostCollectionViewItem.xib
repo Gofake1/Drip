@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="PostCollectionViewItem" customModule="Drip" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="c22-O7-iKe" id="nQF-Ix-X7u"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="c22-O7-iKe">
+            <rect key="frame" x="0.0" y="0.0" width="160" height="160"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3hq-PH-LGW">
+                    <rect key="frame" x="0.0" y="0.0" width="160" height="160"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" id="SkV-qQ-XyJ"/>
+                    <connections>
+                        <binding destination="-2" name="value" keyPath="representedObject.image" id="Bsh-zj-HxJ"/>
+                    </connections>
+                </imageView>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MDT-0I-QZQ">
+                    <rect key="frame" x="2" y="4" width="156" height="17"/>
+                    <gestureRecognizers>
+                        <clickGestureRecognizer delaysPrimaryMouseButtonEvents="YES" numberOfClicksRequired="1" id="0aw-6D-kkD">
+                            <connections>
+                                <action selector="showUser:" target="-2" id="WSc-zr-BLD"/>
+                            </connections>
+                        </clickGestureRecognizer>
+                    </gestureRecognizers>
+                    <textFieldCell key="cell" lineBreakMode="truncatingTail" allowsUndo="NO" sendsActionOnEndEditing="YES" title="-" id="ejH-od-ede">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="highlightColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                    <connections>
+                        <binding destination="-2" name="value" keyPath="representedObject.username" id="VBS-D2-KwE"/>
+                    </connections>
+                </textField>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="MDT-0I-QZQ" secondAttribute="trailing" constant="4" id="KgL-hm-Mm2"/>
+                <constraint firstAttribute="trailing" secondItem="3hq-PH-LGW" secondAttribute="trailing" id="V8m-w8-63P"/>
+                <constraint firstAttribute="bottom" secondItem="3hq-PH-LGW" secondAttribute="bottom" id="ZyS-vc-Jfm"/>
+                <constraint firstItem="3hq-PH-LGW" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="drD-ZY-4rf"/>
+                <constraint firstItem="3hq-PH-LGW" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="jqC-lX-3tX"/>
+                <constraint firstAttribute="bottom" secondItem="MDT-0I-QZQ" secondAttribute="bottom" constant="4" id="pq8-gZ-P1L"/>
+                <constraint firstItem="MDT-0I-QZQ" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="4" id="zWS-f2-mGr"/>
+            </constraints>
+        </customView>
+    </objects>
+</document>
